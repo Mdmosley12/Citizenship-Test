@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon listen.js",
     "create-dbs": "mysql -u root -p < ./dbConfig/create-databases.sql",
-    "seed-testdb": "mysql -u root -p test_database < ./dbConfig/seed-testDatabase.sql"
+    "seed": "node ./dbConfig/run-seed.js"
   },
   "repository": {
     "type": "git",
