@@ -1,10 +1,21 @@
 const {
+  selectEndpoints,
   selectAllQuestions,
   selectQuestionById,
   selectRandomQuestions,
   selectAllAnswers,
   selectAnswersByQuestionId,
 } = require("../models/models.js");
+
+const getEndpoints = (request, response, next) => {
+  selectEndpoints()
+    .then((endpoints) => {
+      response.status(200).send({ endpoints });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
 
 const getQuestions = (request, response, next) => {
   selectAllQuestions()
@@ -59,6 +70,7 @@ const getAnswersByQuestionId = (request, response, next) => {
 };
 
 module.exports = {
+  getEndpoints,
   getQuestions,
   getQuestionById,
   getAnswers,
