@@ -2,6 +2,7 @@ const {
   selectAllQuestions,
   selectQuestionById,
   selectAllAnswers,
+  selectAnswersByQuestionId,
 } = require("../models/models.js");
 
 const getQuestions = (request, response, next) => {
@@ -35,4 +36,20 @@ const getAnswers = (request, response, next) => {
     });
 };
 
-module.exports = { getQuestions, getQuestionById, getAnswers };
+const getAnswersByQuestionId = (request, response, next) => {
+  const { question_id } = request.params;
+  selectAnswersByQuestionId(question_id)
+    .then((answers) => {
+      response.status(200).send({ answers });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+module.exports = {
+  getQuestions,
+  getQuestionById,
+  getAnswers,
+  getAnswersByQuestionId,
+};

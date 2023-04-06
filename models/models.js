@@ -1,8 +1,8 @@
-const db = require("../dbConfig/connection");
+const { pool } = require("../dbConfig/connection");
 
 const selectAllQuestions = () => {
   const queryString = "SELECT * FROM questions;";
-  return db
+  return pool
     .promise()
     .query(queryString)
     .then((result) => {
@@ -13,7 +13,7 @@ const selectAllQuestions = () => {
 const selectQuestionById = (question_id) => {
   const queryValues = [question_id];
   const queryString = `SELECT * FROM questions WHERE id = ?`;
-  return db
+  return pool
     .promise()
     .query(queryString, queryValues)
     .then((result) => {
@@ -23,7 +23,7 @@ const selectQuestionById = (question_id) => {
 
 const selectAllAnswers = () => {
   const queryString = "SELECT * FROM answers";
-  return db
+  return pool
     .promise()
     .query(queryString)
     .then((result) => {
@@ -31,4 +31,20 @@ const selectAllAnswers = () => {
     });
 };
 
-module.exports = { selectAllQuestions, selectQuestionById, selectAllAnswers };
+const selectAnswersByQuestionId = (question_id) => {
+  const queryValues = [question_id];
+  const queryString = `SELECT * FROM answers WHERE question_id = ?`;
+  return pool
+    .promise()
+    .query(queryString, queryValues)
+    .then((result) => {
+      return result[0];
+    });
+};
+
+module.exports = {
+  selectAllQuestions,
+  selectQuestionById,
+  selectAllAnswers,
+  selectAnswersByQuestionId,
+};
