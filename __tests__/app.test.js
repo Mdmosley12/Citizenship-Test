@@ -40,6 +40,14 @@ describe("application testing", () => {
           });
         });
     });
+    test("Returns a 404 status code and an error message when the entered path does not exist", () => {
+      return request(app)
+        .get("/notAPath")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Path Not Found!");
+        });
+    });
   });
   describe("get question by id", () => {
     test("Returns a 200 status code", () => {
@@ -68,6 +76,14 @@ describe("application testing", () => {
           });
         });
     });
+    test("Returns a 404 status code and an error message when the requested question does not exist", () => {
+      return request(app)
+        .get("/questions/999")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Question Not Found!");
+        });
+    });
   });
   describe("get random questions", () => {
     test("Returns a 200 status code", () => {
@@ -93,6 +109,14 @@ describe("application testing", () => {
               const response2 = questions;
               expect(response1).not.toEqual(response2);
             });
+        });
+    });
+    test("Returns a 404 status code and an error message when the entered path does not exist", () => {
+      return request(app)
+        .get("/randoooooomQuestions")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Path Not Found!");
         });
     });
   });
@@ -125,6 +149,14 @@ describe("application testing", () => {
           });
         });
     });
+    test("Returns a 404 status code and an error message when the entered path does not exist", () => {
+      return request(app)
+        .get("/answersssss")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Path Not Found!");
+        });
+    });
   });
   describe("get answers by question id", () => {
     test("Returns a 200 status code", () => {
@@ -153,6 +185,14 @@ describe("application testing", () => {
               })
             );
           });
+        });
+    });
+    test("Returns a 404 status code and an error message when the requested question does not exist", () => {
+      return request(app)
+        .get("/answers/999")
+        .expect(404)
+        .then(({ body }) => {
+          expect(body.msg).toBe("Question Not Found!");
         });
     });
   });

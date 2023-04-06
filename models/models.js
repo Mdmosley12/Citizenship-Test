@@ -17,7 +17,14 @@ const selectQuestionById = (question_id) => {
     .promise()
     .query(queryString, queryValues)
     .then((result) => {
-      return result[0];
+      if (result[0].length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: "Requested question not found!",
+        });
+      } else {
+        return result[0];
+      }
     });
 };
 
@@ -48,7 +55,14 @@ const selectAnswersByQuestionId = (question_id) => {
     .promise()
     .query(queryString, queryValues)
     .then((result) => {
-      return result[0];
+      if (result[0].length === 0) {
+        return Promise.reject({
+          status: 404,
+          msg: "Requested question not found!",
+        });
+      } else {
+        return result[0];
+      }
     });
 };
 
