@@ -1,0 +1,85 @@
+{
+    "GET /": {
+        "description": "Returns a JSON representing all of the available API endpoints"
+    },
+    "GET /questions": {
+        "description": "Returns an array of all questions",
+        "queries": [],
+        "exampleResponse": {
+            "questions": [
+                {
+                    "id": 1,
+                    "question_text": "What is the name of the UK's flag?"
+                }
+            ]
+        }
+    },
+    "GET /questions/:question_id": {
+        "description": "Returns an array containing the requested question",
+        "queries": [],
+        "exampleResponse": {
+            "question": [
+                {
+                    "id": 2,
+                    "question_text": "What is the name of the national anthem of the UK?"
+                }
+            ]
+        }
+    },
+    "GET /randomQuestions": {
+        "description": "Returns an array containing 24 questions in a random order",
+        "queries": [],
+        "exampleResponse": {
+            "questions": [
+                {
+                    "id": 3,
+                    "question_text": "What is the name of the building that houses the UK parliament?"
+                },
+                {
+                    "id": 15,
+                    "question_text": "What is the name of the detective created by Sir Arthur Conan Doyle?"
+                }
+            ]
+        }
+    },
+    "GET /answers": {
+        "description": "Returns an array containing all answers",
+        "queries": [],
+        "exampleResponse": {
+            "answers": [
+                {
+                    "id": 1,
+                    "question_id": 2,
+                    "answer_text": "God Save the Queen",
+                    "is_correct": 1
+                }
+            ]
+        }
+    },
+    "GET /answers/:question_id": {
+        "description": "Returns an array containing all answers related to the requested question",
+        "queries": [],
+        "exampleResponse": {
+            "answers": [
+                {
+                    "id": 1,
+                    "question_id": 2,
+                    "answer_text": "God Save the Queen",
+                    "is_correct": 1
+                },
+                {
+                    "id": 3,
+                    "question_id": 2,
+                    "answer_text": "O Canada",
+                    "is_correct": 0
+                },
+                {
+                    "id": 10,
+                    "question_id": 2,
+                    "answer_text": "The Star-Spangled Banner",
+                    "is_correct": 0
+                }
+            ]
+        }
+    }
+}

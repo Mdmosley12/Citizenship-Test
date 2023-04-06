@@ -1,4 +1,11 @@
 const { pool } = require("../dbConfig/connection");
+const fs = require("fs/promises");
+
+const selectEndpoints = () => {
+  return fs.readFile("./endpoints.json", "utf-8", (err, data) => {
+    if (err) throw err;
+  });
+};
 
 const selectAllQuestions = () => {
   const queryString = "SELECT * FROM questions;";
@@ -67,6 +74,7 @@ const selectAnswersByQuestionId = (question_id) => {
 };
 
 module.exports = {
+  selectEndpoints,
   selectAllQuestions,
   selectQuestionById,
   selectRandomQuestions,

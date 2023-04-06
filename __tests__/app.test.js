@@ -13,6 +13,26 @@ afterAll(() => {
 });
 
 describe("application testing", () => {
+  describe("get endpoints", () => {
+    test("Returns with all the endpoints available to the api", () => {
+      return request(app)
+        .get("/")
+        .expect(200)
+        .then(({ body: { endpoints } }) => {
+          const parsedEndpoints = JSON.parse(endpoints);
+          expect(parsedEndpoints).toEqual(
+            expect.objectContaining({
+              "GET /": expect.any(Object),
+              "GET /questions": expect.any(Object),
+              "GET /questions/:question_id": expect.any(Object),
+              "GET /randomQuestions": expect.any(Object),
+              "GET /answers": expect.any(Object),
+              "GET /answers/:question_id": expect.any(Object),
+            })
+          );
+        });
+    });
+  });
   describe("get questions", () => {
     test("Returns a 200 status code", () => {
       return request(app).get("/questions").expect(200);
