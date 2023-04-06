@@ -22,7 +22,7 @@ describe("application testing", () => {
         .get("/questions")
         .expect(200)
         .then(({ body: { questions } }) => {
-          expect(questions.length).toBe(3);
+          expect(questions.length).toBe(25);
         });
     });
     test("Returned questions contain all object keys", () => {
@@ -69,6 +69,33 @@ describe("application testing", () => {
         });
     });
   });
+  describe("get random questions", () => {
+    test("Returns a 200 status code", () => {
+      return request(app).get("/randomQuestions").expect(200);
+    });
+    test("Returns 24 questions", () => {
+      return request(app)
+        .get("/randomQuestions")
+        .expect(200)
+        .then(({ body: { questions } }) => {
+          expect(questions.length).toBe(24);
+        });
+    });
+    test("Returned question are in a random order", () => {
+      return request(app)
+        .get("/randomQuestions")
+        .expect(200)
+        .then(({ body: { questions } }) => {
+          const response1 = questions;
+          return request(app)
+            .get("/randomQuestions")
+            .then(({ body: { questions } }) => {
+              const response2 = questions;
+              expect(response1).not.toEqual(response2);
+            });
+        });
+    });
+  });
   describe("get answers", () => {
     test("Returns a 200 status code", () => {
       return request(app).get("/answers").expect(200);
@@ -78,7 +105,7 @@ describe("application testing", () => {
         .get("/answers")
         .expect(200)
         .then(({ body: { answers } }) => {
-          expect(answers.length).toBe(9);
+          expect(answers.length).toBe(75);
         });
     });
     test("Returned answers contain all object keys", () => {

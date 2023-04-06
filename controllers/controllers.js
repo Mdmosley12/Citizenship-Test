@@ -1,6 +1,7 @@
 const {
   selectAllQuestions,
   selectQuestionById,
+  selectRandomQuestions,
   selectAllAnswers,
   selectAnswersByQuestionId,
 } = require("../models/models.js");
@@ -20,6 +21,16 @@ const getQuestionById = (request, response, next) => {
   selectQuestionById(question_id)
     .then((question) => {
       response.status(200).send({ question });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+const getRandomQuestions = (request, response, next) => {
+  selectRandomQuestions()
+    .then((questions) => {
+      response.status(200).send({ questions });
     })
     .catch((err) => {
       next(err);
@@ -52,4 +63,5 @@ module.exports = {
   getQuestionById,
   getAnswers,
   getAnswersByQuestionId,
+  getRandomQuestions,
 };
