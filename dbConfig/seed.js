@@ -23,8 +23,7 @@ const seed = ({ questionsData, answersData }) => {
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           question_id INT NOT NULL,
           answer_text TEXT NOT NULL,
-          is_correct BOOLEAN NOT NULL,
-          FOREIGN KEY (question_id) REFERENCES questions(id)
+          is_correct BOOLEAN NOT NULL
           );`);
 
       return Promise.all([questionsTablePromise, answersTablePromise]);

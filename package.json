@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest ./__tests__/app.test",
     "start": "nodemon listen.js",
-    "create-dbs": "mysql -u root -p < ./dbConfig/create-databases.sql",
+    "create-dbs": "mysql -h aws.connect.psdb.cloud -u 8qjdmsxgn0sok3is2l50 -p citizenship-test-db < ./dbConfig/create-databases.sql",
     "seed": "node ./dbConfig/run-seed.js"
   },
   "repository": {
